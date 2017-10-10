@@ -1,0 +1,6 @@
+skatetricks = {
+	"Trick": ["Heelflip", "Kickflip"],
+	"Stance": ["Regular", "Fakie", "Nollie", "Switch"],
+  "Obstacle": ["Bank", "Flat Rail"],
+	"Random": ["Hands in Pockets", "Holding a Skateboard"]
+ }
