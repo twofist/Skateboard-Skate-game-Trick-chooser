@@ -1,0 +1,49 @@
+.cards img{
+		position: relative;
+		margin: 1em;
+	}
+	
+	#image1{
+		position: relative;
+		float: left;
+	}
+    #image2{
+		position: relative;
+		float: left;
+	}
+	#image3{
+		position: relative;
+		float: left;
+	}
+	#image4{
+		position: relative;
+		float: left;
+	}
+	
+	h1{
+		position: absolute;
+		left: 70px;
+		top: 5px;
+	}
+	
+	h2{
+		position: absolute;
+		left:80px;
+		top:90px;
+		visibility: hidden;
+	}
+	
+	h3{
+		position: absolute;
+		left:80px;
+		top:190px;
+		visibility: hidden;
+	}
+	
+	.tries{
+		float: left;
+	}
+	
+	#triesnum{
+		float: right;
+	}
