@@ -1,0 +1,233 @@
+<meta charset="utf-8">
+
+<style type="text/css">
+	.cards img{
+		position: relative;
+		margin: 1em;
+	}
+	
+	#image1{
+		position: relative;
+		float: left;
+	}
+    #image2{
+		position: relative;
+		float: left;
+	}
+	#image3{
+		position: relative;
+		float: left;
+	}
+	#image4{
+		position: relative;
+		float: left;
+	}
+	
+	h1{
+		position: absolute;
+		left: 70px;
+		top: 5px;
+	}
+	
+	h2{
+		position: absolute;
+		left:80px;
+		top:90px;
+		visibility: hidden;
+	}
+	
+	h3{
+		position: absolute;
+		left:80px;
+		top:190px;
+		visibility: hidden;
+	}
+	
+	.tries{
+		float: left;
+	}
+	
+	#triesnum{
+		float: right;
+	}
+	
+</style>
+
+<div class="text">
+	Skateboarding Skate game trick chooser, Click on the card to choose a trick!
+	<br>
+	The more cards you choose, the more tries you get.
+	<br>
+	Have fun!
+	<br>
+</div>
+
+	<br>
+	<br>
+	<br>
+	<br>
+	
+<div class="cards">
+	<div id="image1">
+		<img src="images/cardback.png" id="trick" onclick="changeimage(this)">
+		<h1>Trick</h1>
+		<h2>empty</h2>
+		<h3>+1 tries</h3>
+	</div>
+	<div id="image2">
+		<img src="images/cardback.png" id="stance" onclick="changeimage(this)">
+		<h1>Stance</h1>
+		<h2>empty</h2>
+		<h3>+1 tries</h3>
+	</div>
+	<div id= "image3">
+		<img src="images/cardback.png" id="obstacle" onclick="changeimage(this)">
+		<h1>Obstacle</h1>
+		<h2>empty</h2>
+		<h3>+1 tries</h3>
+	</div>
+	<div id= "image4">
+		<img src="images/cardback.png" id="random" onclick="changeimage(this)">
+		<h1>Random</h1>
+		<h2>empty</h2>
+		<h3>+1 tries</h3>
+	</div>
+</div>
+
+<button type="button" onclick="landed(this)">Landed</button>
+<button type="button" onclick="failed(this)">Take the L</button>
+<br>
+<div class="tries">Max tries: <div id="triesnum">0</div></div>
+<br>
+<div class="players">
+	<button type="button" onclick="addplayers(this)">Add more players</button>
+	<div id="players">Players: </div>
+</div>
+<br>
+<button type="button" onclick="reset(this)">Reset</button>
+
+<script type="text/javascript" src="skatetricks.json">
+	const jsondata = JSON.parse(skatetricks.json);
+</script>
+
+<script language="javascript">
+	let players = [];
+	let amount = 0;
+	let currentplayer = 0;
+	
+	
+	function addplayers(button){
+		amount++;
+		players.push(new Player(amount));
+		let player = players[amount-1];
+		button.parentNode.innerHTML += '<div id=' + player.number + '>' + player.player + ": " + player.skate + "</div>";
+	}
+	
+	function Player(amount){
+		this.player = "Player "+amount;
+		this.status = true;
+		this.skate = "";
+		this.count = 0;
+		this.number = amount;
+	}
+	
+	function landed(){
+		let image = document.getElementById("image1").childNodes[1];
+		let src = image.src.split("card")[1];
+		if(src === "back.png") return;
+		
+		currentplayer++;
+		
+		for(let ii = 0; ii < 4; ii++){
+			let image = document.getElementById("image"+(ii+1)).childNodes[1];
+			let src = image.src.split("card")[1];
+			if(src === "front.jpg")
+				changeimage(image);
+		}
+	}
+	
+	function failed(){
+		if(players.length < 1) return;
+		
+		let image = document.getElementById("image1").childNodes[1];
+		let src = image.src.split("card")[1];
+		if(src === "back.png") return;
+		
+		if(currentplayer > players.length-1)
+			currentplayer = 0;
+		let player = players[currentplayer];
+		
+		let check = 0;
+		while(!player.status && check < players.length*2){
+			currentplayer++;
+			check++;
+			if(currentplayer > players.length-1)
+				currentplayer = 0;
+			player = players[currentplayer];
+		}
+			
+		
+		player.count++;
+		switch(player.count){
+			case 1: player.skate += "S";
+				break;
+			case 2: player.skate += "k";
+				break;
+			case 3: player.skate += "a";
+				break;
+			case 4: player.skate += "t";
+				break;
+			case 5: player.skate += "e";
+					player.status = false;
+				break;
+			default: if(player.status) console.log("error");
+		}
+		currentplayer++;
+		document.getElementById(player.number).innerHTML = player.player + ": " + player.skate;
+		
+		for(let ii = 0; ii < 4; ii++){
+			let image = document.getElementById("image"+(ii+1)).childNodes[1];
+			let src = image.src.split("card")[1];
+			if(src === "front.jpg")
+				changeimage(image);
+		}
+	}
+	
+    function changeimage(image){
+		document.getElementById(image.id).src = imagetouse(image);
+	}
+	
+	function imagetouse(image){
+		let src = image.src.split("card")[1];
+		if(src === "back.png"){
+			document.getElementById("triesnum").innerHTML = parseInt(document.getElementById("triesnum").innerHTML) +1;
+			image.parentNode.childNodes[5].style.visibility = "visible";
+			setcorrectdata(image);
+			image.parentNode.childNodes[7].style.visibility = "visible";
+			return "images/cardfront.jpg";
+		}else if(src === "front.jpg"){
+			document.getElementById("triesnum").innerHTML = parseInt(document.getElementById("triesnum").innerHTML) -1;
+			image.parentNode.childNodes[5].style.visibility = "hidden";
+			image.parentNode.childNodes[7].style.visibility = "hidden";
+			return "images/cardback.png";
+		}
+		else document.getElementById("tries").innerHTML = "error";
+	}
+	
+	function setcorrectdata(image){
+		let text = image.parentNode.childNodes[3].innerHTML;
+		if(text === "Trick")
+			image.parentNode.childNodes[5].innerHTML = skatetricks.Trick[Math.floor((Math.random() * skatetricks.Trick.length))];
+		else if(text === "Stance")
+			image.parentNode.childNodes[5].innerHTML = skatetricks.Stance[Math.floor((Math.random() * skatetricks.Stance.length))];
+		else if(text === "Obstacle")
+			image.parentNode.childNodes[5].innerHTML = skatetricks.Obstacle[Math.floor((Math.random() * skatetricks.Obstacle.length))];
+		else if(text === "Random")
+			image.parentNode.childNodes[5].innerHTML = skatetricks.Random[Math.floor((Math.random() * skatetricks.Random.length))];
+		else console.log("error");
+	}
+	
+	function reset(){
+		location.reload();
+	}
+</script>
