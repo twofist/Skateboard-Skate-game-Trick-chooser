@@ -19,16 +19,14 @@ let players = [];
 	}
 	
 	function landed(){
-		let image = document.getElementById("image1").childNodes[1];
-		let src = image.src.split("card")[1];
-		if(src === "back.png") return;
+		let src = document.getElementById("card1").childNodes[3];
+		if(getComputedStyle(src).visibility === "hidden") return;
 		
 		currentplayer++;
 		
 		for(let ii = 0; ii < 4; ii++){
-			let image = document.getElementById("image"+(ii+1)).childNodes[1];
-			let src = image.src.split("card")[1];
-			if(src === "front.jpg")
+			let image = document.getElementById("card"+(ii+1));
+			if(getComputedStyle(image.childNodes[3]).visibility === "visible")
 				changeimage(image);
 		}
 	}
@@ -36,9 +34,8 @@ let players = [];
 	function failed(){
 		if(players.length < 1) return;
 		
-		let image = document.getElementById("image1").childNodes[1];
-		let src = image.src.split("card")[1];
-		if(src === "back.png") return;
+		let src = document.getElementById("card1").childNodes[3];
+		if(getComputedStyle(src).visibility === "hidden") return;
 		
 		if(currentplayer > players.length-1)
 			currentplayer = 0;
@@ -73,44 +70,42 @@ let players = [];
 		document.getElementById(player.number).innerHTML = player.player + ": " + player.skate;
 		
 		for(let ii = 0; ii < 4; ii++){
-			let image = document.getElementById("image"+(ii+1)).childNodes[1];
-			let src = image.src.split("card")[1];
-			if(src === "front.jpg")
+			let image = document.getElementById("card"+(ii+1));
+			if(getComputedStyle(image.childNodes[3]).visibility === "visible")
 				changeimage(image);
 		}
 	}
 	
     function changeimage(image){
-		document.getElementById(image.id).src = imagetouse(image);
+		changevisibility(image);
 	}
 	
-	function imagetouse(image){
-		let src = image.src.split("card")[1];
-		if(src === "back.png"){
+	function changevisibility(image){
+		
+		let src = document.getElementById(image.id).childNodes[3];
+		if(getComputedStyle(src).visibility === "hidden"){
 			document.getElementById("triesnum").innerHTML = parseInt(document.getElementById("triesnum").innerHTML) +1;
-			image.parentNode.childNodes[5].style.visibility = "visible";
 			setcorrectdata(image);
-			image.parentNode.childNodes[7].style.visibility = "visible";
-			return "images/cardfront.jpg";
-		}else if(src === "front.jpg"){
+			document.getElementById(image.id).childNodes[3].style.visibility = "visible";
+			document.getElementById(image.id).childNodes[5].style.visibility = "visible";
+		}else if(getComputedStyle(src).visibility === "visible"){
 			document.getElementById("triesnum").innerHTML = parseInt(document.getElementById("triesnum").innerHTML) -1;
-			image.parentNode.childNodes[5].style.visibility = "hidden";
-			image.parentNode.childNodes[7].style.visibility = "hidden";
-			return "images/cardback.png";
+			document.getElementById(image.id).childNodes[3].style.visibility = "hidden";
+			document.getElementById(image.id).childNodes[5].style.visibility = "hidden";
 		}
 		else document.getElementById("tries").innerHTML = "error";
 	}
 	
 	function setcorrectdata(image){
-		let text = image.parentNode.childNodes[3].innerHTML;
+		let text = image.childNodes[1].innerHTML;
 		if(text === "Trick")
-			image.parentNode.childNodes[5].innerHTML = skatetricks.Trick[Math.floor((Math.random() * skatetricks.Trick.length))];
+			image.childNodes[3].innerHTML = skatetricks.Trick[Math.floor((Math.random() * skatetricks.Trick.length))];
 		else if(text === "Stance")
-			image.parentNode.childNodes[5].innerHTML = skatetricks.Stance[Math.floor((Math.random() * skatetricks.Stance.length))];
+			image.childNodes[3].innerHTML = skatetricks.Stance[Math.floor((Math.random() * skatetricks.Stance.length))];
 		else if(text === "Obstacle")
-			image.parentNode.childNodes[5].innerHTML = skatetricks.Obstacle[Math.floor((Math.random() * skatetricks.Obstacle.length))];
+			image.childNodes[3].innerHTML = skatetricks.Obstacle[Math.floor((Math.random() * skatetricks.Obstacle.length))];
 		else if(text === "Random")
-			image.parentNode.childNodes[5].innerHTML = skatetricks.Random[Math.floor((Math.random() * skatetricks.Random.length))];
+			image.childNodes[3].innerHTML = skatetricks.Random[Math.floor((Math.random() * skatetricks.Random.length))];
 		else console.log("error");
 	}
 	
