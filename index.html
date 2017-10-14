@@ -1,12 +1,14 @@
 <meta charset="utf-8">
 
-<title>getstuff</title>
-<meta name="description" content="twofist">
+<title>S.K.A.T.E.</title>
+<meta name="description" content="Skategame trick chooser">
 <meta name="author" content="twofist">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
 
 <link rel="stylesheet" type="text/css" href="stylesheet.css">
+
+<body>
 
 <div class="text">
 	Skateboarding Skate game trick chooser, Click on the card to choose a trick!
@@ -23,26 +25,22 @@
 	<br>
 	
 <div class="cards">
-	<div id="image1">
-		<img src="images/cardback.png" id="trick" onclick="changeimage(this)">
+	<div id="card1" onclick="changeimage(this)">
 		<h1>Trick</h1>
 		<h2>empty</h2>
 		<h3>+1 tries</h3>
 	</div>
-	<div id="image2">
-		<img src="images/cardback.png" id="stance" onclick="changeimage(this)">
+	<div id="card2" onclick="changeimage(this)">
 		<h1>Stance</h1>
 		<h2>empty</h2>
 		<h3>+1 tries</h3>
 	</div>
-	<div id= "image3">
-		<img src="images/cardback.png" id="obstacle" onclick="changeimage(this)">
+	<div id="card3" onclick="changeimage(this)">
 		<h1>Obstacle</h1>
 		<h2>empty</h2>
 		<h3>+1 tries</h3>
 	</div>
-	<div id= "image4">
-		<img src="images/cardback.png" id="random" onclick="changeimage(this)">
+	<div id="card4" onclick="changeimage(this)">
 		<h1>Random</h1>
 		<h2>empty</h2>
 		<h3>+1 tries</h3>
@@ -66,12 +64,7 @@
 </script>
 
 <script language="javascript">
-var players=[],amount=0,currentplayer=0;function addplayers(a){amount++;players.push(new Player(amount));var b=players[amount-1];a.parentNode.innerHTML+="<div id="+b.number+">"+b.player+": "+b.skate+"</div>"}function Player(a){this.player="Player "+a;this.status=!0;this.skate="";this.count=0;this.number=a}
-function landed(){if("back.png"!==document.getElementById("image1").childNodes[1].src.split("card")[1]){currentplayer++;for(var a=0;4>a;a++){var b=document.getElementById("image"+(a+1)).childNodes[1];"front.jpg"===b.src.split("card")[1]&&changeimage(b)}}}
-function failed(){if(!(1>players.length)&&"back.png"!==document.getElementById("image1").childNodes[1].src.split("card")[1]){currentplayer>players.length-1&&(currentplayer=0);for(var a=players[currentplayer],b=0;!a.status&&b<2*players.length;)currentplayer++,b++,currentplayer>players.length-1&&(currentplayer=0),a=players[currentplayer];a.count++;switch(a.count){case 1:a.skate+="S";break;case 2:a.skate+="k";break;case 3:a.skate+="a";break;case 4:a.skate+="t";break;case 5:a.skate+="e";a.status=!1;break;
-default:a.status&&console.log("error")}currentplayer++;document.getElementById(a.number).innerHTML=a.player+": "+a.skate;for(a=0;4>a;a++)b=document.getElementById("image"+(a+1)).childNodes[1],"front.jpg"===b.src.split("card")[1]&&changeimage(b)}}function changeimage(a){document.getElementById(a.id).src=imagetouse(a)}
-function imagetouse(a){var b=a.src.split("card")[1];if("back.png"===b)return document.getElementById("triesnum").innerHTML=parseInt(document.getElementById("triesnum").innerHTML)+1,a.parentNode.childNodes[5].style.visibility="visible",setcorrectdata(a),a.parentNode.childNodes[7].style.visibility="visible","images/cardfront.jpg";if("front.jpg"===b)return document.getElementById("triesnum").innerHTML=parseInt(document.getElementById("triesnum").innerHTML)-1,a.parentNode.childNodes[5].style.visibility=
-"hidden",a.parentNode.childNodes[7].style.visibility="hidden","images/cardback.png";document.getElementById("tries").innerHTML="error"}
-function setcorrectdata(a){var b=a.parentNode.childNodes[3].innerHTML;"Trick"===b?a.parentNode.childNodes[5].innerHTML=skatetricks.Trick[Math.floor(Math.random()*skatetricks.Trick.length)]:"Stance"===b?a.parentNode.childNodes[5].innerHTML=skatetricks.Stance[Math.floor(Math.random()*skatetricks.Stance.length)]:"Obstacle"===b?a.parentNode.childNodes[5].innerHTML=skatetricks.Obstacle[Math.floor(Math.random()*skatetricks.Obstacle.length)]:"Random"===b?a.parentNode.childNodes[5].innerHTML=skatetricks.Random[Math.floor(Math.random()*
-skatetricks.Random.length)]:console.log("error")}function reset(){location.reload()};
+var players=[],amount=0,currentplayer=0;function addplayers(a){amount++;players.push(new Player(amount));var b=players[amount-1];a.parentNode.innerHTML+="<div id="+b.number+">"+b.player+": "+b.skate+"</div>"}function Player(a){this.player="Player "+a;this.status=!0;this.skate="";this.count=0;this.number=a}function landed(){var a=document.getElementById("card1").childNodes[3];if("hidden"!==getComputedStyle(a).visibility)for(currentplayer++,a=0;4>a;a++){var b=document.getElementById("card"+(a+1));"visible"===getComputedStyle(b.childNodes[3]).visibility&&changeimage(b)}}function failed(){if(!(1>players.length)){var a=document.getElementById("card1").childNodes[3];if("hidden"!==getComputedStyle(a).visibility){currentplayer>players.length-1&&(currentplayer=0);a=players[currentplayer];for(var b=0;!a.status&&b<2*players.length;)currentplayer++,b++,currentplayer>players.length-1&&(currentplayer=0),a=players[currentplayer];a.count++;switch(a.count){case 1:a.skate+="S";break;case 2:a.skate+="k";break;case 3:a.skate+="a";break;case 4:a.skate+="t";break;case 5:a.skate+="e";a.status=!1;break;default:a.status&&console.log("error")}currentplayer++;document.getElementById(a.number).innerHTML=a.player+": "+a.skate;for(a=0;4>a;a++)b=document.getElementById("card"+(a+1)),"visible"===getComputedStyle(b.childNodes[3]).visibility&&changeimage(b)}}}function changeimage(a){changevisibility(a)}function changevisibility(a){var b=document.getElementById(a.id).childNodes[3];"hidden"===getComputedStyle(b).visibility?(document.getElementById("triesnum").innerHTML=parseInt(document.getElementById("triesnum").innerHTML)+1,setcorrectdata(a),document.getElementById(a.id).childNodes[3].style.visibility="visible",document.getElementById(a.id).childNodes[5].style.visibility="visible"):"visible"===getComputedStyle(b).visibility?(document.getElementById("triesnum").innerHTML=parseInt(document.getElementById("triesnum").innerHTML)-1,document.getElementById(a.id).childNodes[3].style.visibility="hidden",document.getElementById(a.id).childNodes[5].style.visibility="hidden"):document.getElementById("tries").innerHTML="error"}function setcorrectdata(a){var b=a.childNodes[1].innerHTML;"Trick"===b?a.childNodes[3].innerHTML=skatetricks.Trick[Math.floor(Math.random()*skatetricks.Trick.length)]:"Stance"===b?a.childNodes[3].innerHTML=skatetricks.Stance[Math.floor(Math.random()*skatetricks.Stance.length)]:"Obstacle"===b?a.childNodes[3].innerHTML=skatetricks.Obstacle[Math.floor(Math.random()*skatetricks.Obstacle.length)]:"Random"===b?a.childNodes[3].innerHTML=skatetricks.Random[Math.floor(Math.random()*skatetricks.Random.length)]:console.log("error")}function reset(){location.reload()};
 </script>
+
+</body>
