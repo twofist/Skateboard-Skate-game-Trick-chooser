@@ -11,18 +11,31 @@
 <body>
 
 <div class="text">
-	Skateboarding Skate game trick chooser, Click on the card to choose a trick!
+	<h4>S.K.A.T.E.</h4>
+	<h5>Skateboarding Skate game trick chooser, Click on the card to choose a trick!
+	<br>
+	(The trick card has to be chosen)
 	<br>
 	The more cards you choose, the more tries you get.
 	<br>
-	Have fun!
-	<br>
+	Have fun!</h5>
 </div>
 
+<div id="buttons">
+		<button type="button" id="btn1" onclick="landed(this)">Landed</button>
+		<button type="button" id="btn2" onclick="failed(this)">Take the L</button>
+		<button type="button" id="btn4" onclick="reset(this)">Reset</button>
 	<br>
 	<br>
-	<br>
-	<br>
+	<div class="players">
+		<button type="button" id="btn3" onclick="addplayers(this)">Add more players</button>
+		<br>
+		<div class="tries">Max tries: <div id="triesnum">0</div></div>
+		<br>
+		<div id="players">Players: </div>
+		
+	</div>
+</div>
 	
 <div class="cards">
 	<div id="card1" onclick="changeimage(this)">
@@ -47,17 +60,7 @@
 	</div>
 </div>
 
-<button type="button" onclick="landed(this)">Landed</button>
-<button type="button" onclick="failed(this)">Take the L</button>
-<br>
-<div class="tries">Max tries: <div id="triesnum">0</div></div>
-<br>
-<div class="players">
-	<button type="button" onclick="addplayers(this)">Add more players</button>
-	<div id="players">Players: </div>
-</div>
-<br>
-<button type="button" onclick="reset(this)">Reset</button>
+
 
 <script type="text/javascript" src="skatetricks.json">
 	const jsondata = JSON.parse(skatetricks.json);
