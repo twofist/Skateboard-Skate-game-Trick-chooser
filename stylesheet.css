@@ -6,12 +6,45 @@ body {
 }
 
 .text {
+	background-color: #2C2F33;
+	text-align: center;
+	line-height: 1.5;
 	color: white;
+	font-family: Verdana, Courier New, serif;
 }
 
-.cards img{
-	position: relative;
-	margin: 1em;
+.cards {
+	width: 1400px;
+	margin: 0 auto;
+}
+
+#buttons{
+	width: 225px;
+	margin: 0 auto;
+	left: 50%;
+}
+
+#btn1, #btn2, #btn4{
+	float: left;
+}
+
+#btn1, #btn2, #btn3, #btn4{
+	background-color: #2C2F33;
+	color: white;
+	border: none;
+	text-align: center;
+	font-size: 16px;
+	border: 1px solid white;
+	font-family: Verdana, Courier New, serif;
+	border-radius: 2px;
+	height: 40px;
+	width: 70px;
+	margin: 2px;
+}
+
+#btn3{
+	width: 120px;
+	height: 45;
 }
 	
 #card1, #card2, #card3, #card4{
@@ -20,10 +53,10 @@ body {
 	height: 400;
     padding: 10px;
     border: 10px solid #FFE259;
-    margin: 5px;
+    margin: 25px;
 	background-color: grey;
 	border-radius: 25px;
-	float:left;
+	float: left;
 	background-image: url("images/skateboarding.png");
 	background-repeat: no-repeat;
 	background-position: center;
@@ -36,6 +69,7 @@ h1{
 	text-align: center;
 	margin: 20px;
 	border-radius: 5px;
+	font-family: Verdana, Courier New, serif;
 }
 	
 h2{
@@ -48,6 +82,8 @@ h2{
 	border-top: 2px solid black;
 	border-right: 1px solid black;
 	visibility: hidden;
+	font-family: Verdana, Courier New, serif;
+	line-height: 1.5;
 }
 	
 h3{
@@ -59,18 +95,37 @@ h3{
 	border-radius: 5px;
 	border: 2px solid #b9b6ab;
 	visibility: hidden;
+	font-family: Verdana, Courier New, serif;
+	line-height: 1.5;
+}
+
+h4{
+	font-size: 40px;
+	font-family: Verdana, Courier New, serif;
+}
+
+h5{
+	font-size: 20px;
+	font-family: Verdana, Courier New, serif;
+	line-height: 1.5;
 }
 	
 .tries{
 	float: left;
 	color: white;
+	font-family: Verdana, Courier New, serif;
+	line-height: 1.5;
 }
 	
 #triesnum{
 	float: right;
 	color: white;
+	font-family: Verdana, Courier New, serif;
+	line-height: 1.5;
 }
 
 .players{
 	color: white;
+	font-family: Verdana, Courier New, serif;
+	line-height: 1.5;
 }
